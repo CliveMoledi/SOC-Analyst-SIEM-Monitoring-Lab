@@ -20,3 +20,53 @@ to find this ip that performed the most reconnaissance
 Which is 203.0.113.45 with 297 firewall events. 
 
 <img width="946" height="541" alt="Screenshot 2026-06-17 at 22 22 44" src="https://github.com/user-attachments/assets/e02c215a-5209-4ebe-9a59-a1c78346b66f" />
+
+---
+## finding the ip that was targeted by scans
+
+i ran this query to find it. As seen in the screenshot below
+
+index="network_logs" sourcetype="firewall_logs"
+| stats count by dst_ip
+| sort - count
+
+Which is 10.0.0.20 with 351 firewall events
+
+<img width="1438" height="588" alt="Screenshot 2026-06-17 at 22 50 50" src="https://github.com/user-attachments/assets/eedd08fc-c3d4-4003-8e02-ce2025ca6f53" />
+
+---
+Right now we are going to find which username was targeted in VPN logs
+
+from the query:
+
+index="network_logs" sourcetype="vpn_logs"
+| stats count by username
+| sort - count
+
+we can see svc_backup is the most targeted with 135 counts
+
+<img width="945" height="579" alt="Screenshot 2026-06-17 at 23 03 04" src="https://github.com/user-attachments/assets/67923a1f-a821-4825-b219-04892e637f54" />
+
+---
+Right now we are going to find which internal IP was assigned after successful VPN login
+using the query 
+
+index="network_logs" sourcetype="vpn_logs"
+| search result="success"
+| table username, src_ip, dst_ip
+
+
+
+---
+Right now we are going to find which
+using the query 
+
+---
+Right now we are going to find which
+using the query 
+
+---
+Right now we are going to find which
+using the query 
+
+---
