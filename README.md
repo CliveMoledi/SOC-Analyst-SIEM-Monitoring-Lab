@@ -61,15 +61,38 @@ i have concluded that 10.8.0.23 is the  internal IP was assigned after successfu
 
 
 ---
-Right now we are going to find which
+Right now we are going to find which port was used for lateral SMB attempts?
+using the query 
+<img width="945" height="534" alt="Screenshot 2026-06-17 at 23 50 06" src="https://github.com/user-attachments/assets/c039dac5-4ada-484a-8d58-6dee19184545" />
+
+ port 445
+ 
+---
+Right now we are going to find in the IDS logs, which host beaconed to the C2?
 using the query 
 
----
-Right now we are going to find which
-using the query 
+the host 10.0.0.60,
+ IP was observed to be associated with C2:  198.51.100.77
+
+index="network_logs" source="ids_alerts.json" alert="ET TROJAN Possible C2 Beaconing"
+| stats count by src_ip,dst_ip,dst_port
+
+
+<img width="946" height="417" alt="Screenshot 2026-06-18 at 00 02 49" src="https://github.com/user-attachments/assets/6882cc78-5e91-40d9-9e16-528dccb03a1f" />
+
+
 
 ---
-Right now we are going to find which
-using the query 
+Right now we are going to find Which host showed the exfiltration attempts
 
----
+with the query
+
+index="network_logs" source="ids_alerts.json" alert="ET INFO Possible HTTP POST Large Upload"
+| stats count by src_ip,dst_ip,dst_port
+
+we can clearly see it is 10.0.0.51
+
+<img width="946" height="502" alt="Screenshot 2026-06-18 at 00 04 27" src="https://github.com/user-attachments/assets/a64feaf0-c019-4694-816e-71271218d3d2" />
+
+
+
