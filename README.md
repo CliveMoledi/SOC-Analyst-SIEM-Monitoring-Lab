@@ -51,10 +51,13 @@ we can see svc_backup is the most targeted with 135 counts
 Right now we are going to find which internal IP was assigned after successful VPN login
 using the query 
 
-index="network_logs" sourcetype="vpn_logs"
-| search result="success"
-| table username, src_ip, dst_ip
+index="network_logs" source="vpn_auth.json" result=SUCCESS username=svc_backup src_ip="203.0.113.45"
+| table _time assigned_ip
+| sort _time
 
+i have concluded that 10.8.0.23 is the  internal IP was assigned after successful VPN login on the basis that The IP 10.8.0.23 stands out because it shows two successful authentications exactly 10 seconds apart. Normally, a single login establishes a continuous VPN session, so rapid, back-to-back connections for the same account are highly anomalous. From a security perspective, this pattern typically indicates a misconfigured automated script stuck in a reconnect loop or an attacker attempting to establish concurrent sessions to maintain access.
+
+<img width="947" height="539" alt="Screenshot 2026-06-17 at 23 37 30" src="https://github.com/user-attachments/assets/05ee86ca-4dda-4b05-9f41-2691a701f725" />
 
 
 ---
