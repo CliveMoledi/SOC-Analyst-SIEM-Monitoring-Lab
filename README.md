@@ -1,3 +1,4 @@
+
 # SOC-Analyst-SIEM-Monitoring-Lab
 
 right now we have splunk open we are going to do some log analysis. below here is splunk opening.
@@ -16,4 +17,6 @@ index="network_logs" sourcetype="firewall_logs"
 This query filters firewall logs, counts how many events each source IP generated, then ranks them to identify the most active (potentially scanning) external IP.
 
 to find this ip that performed the most reconnaissance
-Which is 203.0.113.45, 
+Which is 203.0.113.45 with 297 firewall events. 
+
+<img width="946" height="541" alt="Screenshot 2026-06-17 at 22 22 44" src="https://github.com/user-attachments/assets/e02c215a-5209-4ebe-9a59-a1c78346b66f" />
